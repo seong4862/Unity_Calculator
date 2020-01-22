@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{6A5D27C4-28CD-77BC-2737-0EE131923C83}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Cal.cs">
+    <Files>
+      <File FileName="Assets/TitleUIManager.cs" Line="12" Column="6" />
+      <File FileName="Assets/ResultUIManager.cs" Line="11" Column="41" />
+      <File FileName="Assets/RestartUIManager.cs" Line="10" Column="29" />
+      <File FileName="Assets/ExitUIManager.cs" Line="5" Column="27" />
+      <File FileName="Assets/Cal.cs" Line="87" Column="35" />
+      <File FileName="Assets/Result.cs" Line="24" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Calculator" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Cal.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d49494c9-c59a-4a5c-a2d5-2550cada6f3a" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
