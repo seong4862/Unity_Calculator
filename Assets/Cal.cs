@@ -5,88 +5,141 @@ using UnityEngine.UI;
 
 public class Cal : MonoBehaviour
 {
-    public Text label;
-    int _num1 = 0;
-    bool _second = false;
-    bool _isPlus = false;
-    bool _isMinus = false;
-    bool _isMultiply = false;
-    bool _isDivision = false;
 
-    // 숫자 버튼 눌렀을 때
+    public Text label;
+    public Text process;
+    int _num = 0;
+    int op = 0; // 기본, '+', '-', '*', '/' => 오류 : -1
+    List<string> _pc = new List<string>();
+    
+    // '숫자' 버튼 눌렀을 때
     public void Onclicked_Num(int num)
     {
-        if (_second == false)
+        label.text = num.ToString();
+        _pc.Add(num.ToString());
+
+        if(op == 0)
         {
-            if (label.text == "0")
-            {
-                label.text = num.ToString();
-            }
-            else
-            {
-                label.text += num;
-            }
+            _num = num;
         }
         else
         {
-            label.text = num.ToString();
-            _second = false;
+            if (op == 1) _num += num;
+            else if (op == 2) _num -= num;
+            else if (op == 3) _num *= num;
+            else
+            {
+                if (num == 0)
+                {
+                    label.text = "impossible";
+                    _num = 0;
+                    //다른 연산자(+, -, *, /) 키 막는 기능 추가
+                }
+                else _num /= num;
+            }
+            op = 0;
         }
     }
 
-    // C 버튼 눌렀을 때
+    // 'C' 버튼 눌렀을 때
     public void Onclicked_C()
     {
         label.text = "0";
+        process.text = "";
+        _num = 0;
+        _pc.Clear();
     }
 
-    // + 버튼 눌렀을 때
+    /*------- 연산자 버튼을 눌렀을 때 -------*/
+    
+    // '+' 버튼 눌렀을 때
     public void Onclicked_P()
     {
-        _num1 = int.Parse(label.text);
-        Debug.Log("숫자 1 : " + _num1);
-        _isPlus = true;
-        _second = true;
+        
+        if(op == 0) _pc.Add("+");
+        else _pc[_pc.Count - 1] = "+";
+
+        string tmpt = null;
+        foreach (string s in _pc)
+        {
+            tmpt += s;
+        }
+
+        process.text = tmpt;
+        label.text = _num.ToString();
+
+        Debug.Log("숫자 1 : " + _num + tmpt);
+        op = 1;
     }
 
-    // - 버튼 눌렀을 때
+    // '-' 버튼 눌렀을 때
     public void Onclicked_M()
     {
-        _num1 = int.Parse(label.text);
-        Debug.Log("숫자 1 : " + _num1);
-        _isMinus = true;
-        _second = true;
+        if(op == 0) _pc.Add("-");
+        else _pc[_pc.Count - 1] = "-";
+
+        string tmpt = null;
+        foreach (string s in _pc)
+        {
+            tmpt += s;
+        }
+
+        process.text = tmpt;
+        label.text = _num.ToString();
+
+        Debug.Log("숫자 1 : " + _num);
+        op = 2;
+
     }
 
-    // * 버튼 눌렀을 때
+    // '*' 버튼 눌렀을 때
     public void Onclicked_MP()
     {
-        _num1 = int.Parse(label.text);
-        Debug.Log("숫자 1 : " + _num1);
-        _isMultiply = true;
-        _second = true;
+
+        if(op == 0) _pc.Add("*");
+        else _pc[_pc.Count - 1] = "*";
+
+        string tmpt = null;
+        foreach(string s in _pc)
+        {
+            tmpt += s;
+        }
+
+        process.text = tmpt;
+        label.text = _num.ToString();
+
+        Debug.Log("숫자 1 : " + _num);
+        op = 3;
     }
 
-    // / 버튼 눌렀을 때
+    // '/' 버튼 눌렀을 때
     public void Onclicked_D()
     {
-        _num1 = int.Parse(label.text);
-        Debug.Log("숫자 1 : " + _num1);
-        _isDivision = true;
-        _second = true;
+
+        if (op == 0) _pc.Add("/");
+        else _pc[_pc.Count - 1] = "/";
+
+        string tmpt = null;
+        foreach (string s in _pc)
+        {
+            tmpt += s;
+        }
+
+        process.text = tmpt;
+        label.text = _num.ToString();
+
+        Debug.Log("숫자 1 : " + _num);
+        op = 4;
     }
-    // = 버튼 눌렀을 때
+     
+    /*------- 결과 출력 -------*/
+    
+    // '=' 버튼 눌렀을 때
     public void Onclicked_E()
     {
-        int _num2 = int.Parse(label.text);
-        int last = 0;
-
-        if (_isPlus == true) last = _num1 + _num2;
-        else if (_isMinus == true) last = _num1 - _num2;
-        else if (_isMultiply == true) last = _num1 * _num2;
-        else last = _num1 / _num2;
-
-        label.text = last.ToString();
+        label.text = _num.ToString();
+        if(op == 0) _pc.Add("=");
+        else _pc[_pc.Count - 2] = "=";
 
         string r;
         r = label.text.ToString();
